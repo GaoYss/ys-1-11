@@ -46,6 +46,8 @@ class PurchaseOrderItem(db.Model):
     ingredient_id = db.Column(db.Integer, db.ForeignKey("ingredients.id"), nullable=False)
     quantity = db.Column(db.Float, nullable=False)
     unit_price = db.Column(db.Float, nullable=False)
+    reference_avg_price = db.Column(db.Float, nullable=True)
+    is_overpriced = db.Column(db.Boolean, nullable=False, default=False)
 
     order = db.relationship("PurchaseOrder", back_populates="items")
     ingredient = db.relationship("Ingredient")
@@ -59,4 +61,6 @@ class PurchaseOrderItem(db.Model):
             "quantity": self.quantity,
             "unitPrice": self.unit_price,
             "amount": self.quantity * self.unit_price,
+            "referenceAvgPrice": self.reference_avg_price,
+            "isOverpriced": self.is_overpriced,
         }

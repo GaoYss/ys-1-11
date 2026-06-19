@@ -9,5 +9,8 @@ export const ordersApi = {
   },
   updateStatus(id, status) {
     return http.put(`/orders/${id}/status`, { status })
+  },
+  getAvgPrice(ingredientId) {
+    return http.get(`/orders/avg-price/${ingredientId}`)
   }
 }

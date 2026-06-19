@@ -10,7 +10,7 @@
         <tr v-if="!rows.length">
           <td :colspan="columns.length" class="empty-cell">暂无数据</td>
         </tr>
-        <tr v-for="row in rows" :key="row.id">
+        <tr v-for="row in rows" :key="row.id" :class="rowClass ? rowClass(row) : ''">
           <td v-for="column in columns" :key="column.key">
             <slot :name="column.key" :row="row">
               {{ row[column.key] }}
@@ -25,6 +25,7 @@
 <script setup>
 defineProps({
   columns: { type: Array, required: true },
-  rows: { type: Array, required: true }
+  rows: { type: Array, required: true },
+  rowClass: { type: Function, default: null }
 })
 </script>
